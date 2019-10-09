@@ -1,30 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>register</title>
+    <title>Insert title here</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="jquery-3.4.1.min.js"></script> -->
+
+    <script type="text/javascript">
+
+            $(document).ready(function () {
+
+            $("#search-form").submit(function (event) {
+
+            event.preventDefault();
+            fire_ajax_submit();
+            });
+            });
+
+            function fire_ajax_submit() {
+
+            var search = {}
+            search["name"] = $("#name").val();
+            search["email"] = $("#email").val();
+            search["mobile"] = $("#mobile").val();
+            search["username"] = $("#username").val();
+            search["password"] = $("#password").val();
+            search["status"] = $("#status").val();
+
+
+            $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "http://localhost:8080/postdata",
+
+            data: JSON.stringify(search),
+            dataType: 'json',
+
+            timeout: 600000,
+
+            success : function(search) {
+            alert("Success");
+            $('#result').html(
+                search.id + " " + search.name + " " + search.username
+                + " " + search.password + " " + search.email
+                + " " + search.mobile + " " + search.status);
+            },
+            error: function (e) {
+            alert("error");
+            }
+            });
+            }
+    </script>
 </head>
 <body>
-    <form action="#" th:action="@{/postdata}" th:object="${user}" method="post">
-        Name:<br>
-        <input type="text" th:field="*{name}" >
-        <br>
-        Email:<br>
-        <input type="text" th:field="*{email}">
-        <br>
-        Mobile:<br>
-        <input type="text" th:field="*{mobile}">
-        <br>
-        Username:<br>
-        <input type="text" th:field="*{username}">
-        <br>
-        Password:<br>
-        <input type="text" th:field="*{password}">
-        <br>
-        Marital Status:<br>
-        <input type="text" th:field="*{status}">
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
+
+<form method="POST" id="search-form">
+    name : <input id="name" type="text" name="name" /><br>
+    email : <input type="text" id="email" name="email" /> <br>
+    mobile : <input type="text" id="mobile" name="mobile" /> <br>
+    username : <input type="text" id="username" name="username" /> <br>
+    password : <input type="text" id="password" name="password" /> <br>
+    status : <input type="text" id="status" name="status" /> <br>
+
+
+    <input type="submit" id="button" value="create" />
+</form>
+<div id="result"></div>
+
+
+
 </body>
 </html>
