@@ -14,10 +14,10 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/register")
+    @GetMapping("user/add")
     public String register(Model model){
         model.addAttribute("user", new User());
-        return "register";
+        return "add";
     }
 
 }

@@ -8,17 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
     @Autowired
     private UserDAO userDAO;
 
-    @RequestMapping(value = "/getdata")
+    @RequestMapping(value = "/list")
     public List<User> getData(){
         return userDAO.findAll();
     }
 
-    @PostMapping(value = "/postdata")
+    @PostMapping(value = "/add")
     @ResponseBody
     public User postData(@RequestBody User user){
         return userDAO.save(user);
