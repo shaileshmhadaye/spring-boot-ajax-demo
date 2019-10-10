@@ -20,4 +20,12 @@ public class UserDAO {
     public List<User> findAll(){
         return userRepository.findAll();
     }
+
+    public void delete(Long id){
+        userRepository.deleteById(id);
+    }
+
+    public User findById(Long id){
+        return userRepository.findById(id).orElse(null);
+    }
 }
