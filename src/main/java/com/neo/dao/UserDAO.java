@@ -28,4 +28,8 @@ public class UserDAO {
     public User findById(Long id){
         return userRepository.findById(id).orElse(null);
     }
+
+    public List<User> saveAll(List<User> users){
+        return userRepository.saveAll(users);
+    }
 }
