@@ -1,5 +1,6 @@
 package com.neo.bootstrap;
 
+import com.neo.dao.DepartmentDAO;
 import com.neo.dao.UserDAO;
 import com.neo.model.Department;
 import com.neo.model.User;
@@ -16,23 +17,41 @@ import java.util.List;
 public class UserBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private UserDAO userDAO;
+    private DepartmentDAO departmentDAO;
 
-    public UserBootstrap(UserDAO userDAO) {
+    public UserBootstrap(UserDAO userDAO, DepartmentDAO departmentDAO) {
         this.userDAO = userDAO;
+        this.departmentDAO = departmentDAO;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         userDAO.saveAll(getUsers());
+        departmentDAO.saveAll(getDepartments());
         log.debug("inside bootstrap file!");
     }
 
-    private List<User> getUsers(){
+    private List<Department> getDepartments() {
 
-        Department department = new Department();
-        department.setName("computer");
-        department.setLocation("parel");
-        department.setHeadOfDepartment("test");
+        List<Department> departments = new ArrayList<>();
+
+        Department computer = new Department();
+        computer.setName("computer");
+        computer.setLocation("parel");
+        computer.setHeadOfDepartment("test");
+
+        departments.add(computer);
+
+        Department it = new Department();
+        it.setName("IT");
+        it.setLocation("thane");
+        it.setHeadOfDepartment("test2");
+
+        departments.add(it);
+        return departments;
+    }
+
+    private List<User> getUsers(){
 
         List<User> users = new ArrayList<>();
 
@@ -43,7 +62,7 @@ public class UserBootstrap implements ApplicationListener<ContextRefreshedEvent>
         user.setPassword("password");
         user.setMobile("1234567896");
         user.setStatus("unmarried");
-        user.setDepartment(department);
+        //user.setDepartment();
 
         users.add(user);
 
@@ -54,7 +73,7 @@ public class UserBootstrap implements ApplicationListener<ContextRefreshedEvent>
         user1.setEmail("raj@gmail.com");
         user1.setMobile("2345729823");
         user1.setStatus("married");
-        user1.setDepartment(department);
+        //user1.setDepartment(department);
 
         users.add(user1);
 

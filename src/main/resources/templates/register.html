@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-
-
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>register</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script src="jquery-3.4.1.min.js"></script> -->
-
-    <script type="text/javascript">
-
-            $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
             $("#search-form").submit(function (event) {
 
@@ -42,34 +37,27 @@
 
             success : function(search) {
             alert("Success");
-            $('#result').html(
-                search.id + " " + search.name + " " + search.username
-                + " " + search.password + " " + search.email
-                + " " + search.mobile + " " + search.status);
+
             },
             error: function (e) {
             alert("error");
             }
             });
+
             }
     </script>
 </head>
 <body>
-
-<form method="POST" id="search-form">
-    name : <input id="name" type="text" name="name" /><br>
-    email : <input type="text" id="email" name="email" /> <br>
-    mobile : <input type="text" id="mobile" name="mobile" /> <br>
-    username : <input type="text" id="username" name="username" /> <br>
-    password : <input type="text" id="password" name="password" /> <br>
-    status : <input type="text" id="status" name="status" /> <br>
-
-
-    <input type="submit" id="button" value="create" />
-</form>
-<div id="result"></div>
+    <form method="POST" id="search-form">
+        name : <input id="name" type="text" name="name" /><br>
+        email : <input type="text" id="email" name="email" /> <br>
+        mobile : <input type="text" id="mobile" name="mobile" /> <br>
+        username : <input type="text" id="username" name="username" /> <br>
+        password : <input type="text" id="password" name="password" /> <br>
+        status : <input type="text" id="status" name="status" /> <br>
 
 
-
+        <input type="submit" id="button" value="create" />
+    </form>
 </body>
 </html>

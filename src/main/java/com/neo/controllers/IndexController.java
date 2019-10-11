@@ -20,4 +20,14 @@ public class IndexController {
         return "add";
     }
 
+    @RequestMapping("/departments")
+    public String dept(){
+        return "departments";
+    }
+
+    @RequestMapping("/register")
+    public String register(){
+        return "register";
+    }
+
 }

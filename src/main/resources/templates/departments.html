@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>departments</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            function postDataFromAPI() {
+
+            var modelObj = {
+            name: $("#name").val(),
+            location: $("#location").val(),
+            headOfDepartment: $("#headOfDepartment").val()
+            };
+
+            console.log("post data:"+modelObj);
+
+            $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/department/addDepartment",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            data: JSON.stringify(modelObj),
+            success: function (data) {
+            console.log("POST API RESPONSE::"+data);
+            console.log("Success.");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            }
+            });
+            }
+    </script>
+</head>
+<body>
+    <form method="post" id="department">
+        Name: <input id="name" type="text" name="name"><br>
+        Location: <input id="location" type="text" name="location"><br>
+        Head of Department: <input id="headOfDepartment" type="text" name="headOfDepartment"><br><br>
+        <input id="submit" type="button" value="add department" onclick="postDataFromAPI()">
+    </form>
+
+</body>
+</html>

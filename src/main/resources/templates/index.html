@@ -1,12 +1,66 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html>
-	<head>
-		<meta charset="ISO-8859-1"/>
-		<title>Demo Application</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	</head>
-	<body>
-	<a href="/user/list"><input type="button" name="getData" id="getData" value="GET DATA"></a><br>
-	<a href="/user/add"><input type="button" name="postData" id="postData" value="POST DATA"></a>
-	</body>
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Insert title here</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="jquery-3.4.1.min.js"></script> -->
+
+    <script type="text/javascript">
+
+
+            function getDataFromAPI() {
+			$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "http://localhost:8080/user/list",
+			dataType : 'json',
+			success : function(search) {
+			
+			var json = "<h4>Ajax Response</h4><pre>"
+			+ JSON.stringify(search, null, 4) + "</pre>";
+			$('#response').html(json);
+
+			},
+			error : function(e) {
+			alert("error");
+			}
+
+			});
+			}
+
+			function getDepartments() {
+			$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "http://localhost:8080/department/list",
+			dataType : 'json',
+			success : function(search) {
+
+			var json = "<h4>Ajax Response</h4><pre>"
+			+ JSON.stringify(search, null, 4) + "</pre>";
+			$('#dept').html(json);
+
+			},
+			error : function(e) {
+			alert("error");
+			}
+
+			});
+			}
+    </script>
+</head>
+<body>
+
+<a href="/register"><button>register</button></a><br>
+
+<input type="submit" id="button1" value="view users" onclick="getDataFromAPI()" />
+<div id="response"></div>
+
+<a href="/departments"><button value="add department">Add Department</button></a><br>
+<input type="submit" id="button2" value="view departments" onclick="getDepartments()" />
+<div id="dept"></div>
+</body>
 </html>
