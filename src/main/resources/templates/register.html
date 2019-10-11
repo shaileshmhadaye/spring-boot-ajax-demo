@@ -5,59 +5,56 @@
     <title>register</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
+        function postDataFromAPI() {
 
-            $("#search-form").submit(function (event) {
+            var modelObj = {
+            name : $("#name").val(),
+            email : $("#email").val(),
+            mobile : $("#mobile").val(),
+            username : $("#username").val(),
+            password : $("#password").val(),
+            status : $("#status").val()
+            };
 
-            event.preventDefault();
-            fire_ajax_submit();
-            });
-            });
+            var dept = $("#deptname");
 
-            function fire_ajax_submit() {
+            var postData = {
+                userObj : modelObj,
+                deptObj : dept
+            };
 
-            var search = {}
-            search["name"] = $("#name").val();
-            search["email"] = $("#email").val();
-            search["mobile"] = $("#mobile").val();
-            search["username"] = $("#username").val();
-            search["password"] = $("#password").val();
-            search["status"] = $("#status").val();
-
+            console.log("post data:"+modelObj);
 
             $.ajax({
             type: "POST",
-            contentType: "application/json",
             url: "http://localhost:8080/user/add",
-
-            data: JSON.stringify(search),
-            dataType: 'json',
-
-            timeout: 600000,
-
-            success : function(search) {
-            alert("Success");
-
+            headers: {
+            "Content-Type": "application/json"
             },
-            error: function (e) {
-            alert("error");
+            data: JSON.stringify(postData),
+            success: function (data) {
+            console.log("POST API RESPONSE::"+data);
+            console.log("Success.");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
             }
             });
-
             }
     </script>
 </head>
 <body>
     <form method="POST" id="search-form">
-        name : <input id="name" type="text" name="name" /><br>
-        email : <input type="text" id="email" name="email" /> <br>
-        mobile : <input type="text" id="mobile" name="mobile" /> <br>
-        username : <input type="text" id="username" name="username" /> <br>
-        password : <input type="text" id="password" name="password" /> <br>
-        status : <input type="text" id="status" name="status" /> <br>
+        Name : <input id="name" type="text" name="name" /><br>
+        Email : <input type="text" id="email" name="email" /> <br>
+        Mobile : <input type="text" id="mobile" name="mobile" /> <br>
+        Username : <input type="text" id="username" name="username" /> <br>
+        Password : <input type="text" id="password" name="password" /> <br>
+        Status : <input type="text" id="status" name="status" /> <br>
+        Department : <input type="text" id="dept" name="dept">
 
-
-        <input type="submit" id="button" value="create" />
+        <input type="button" id="button" value="create" onclick="postDataFromAPI()"/>
     </form>
 </body>
 </html>
+
+

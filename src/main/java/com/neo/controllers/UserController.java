@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@Slf4j
 @RestController
+@Slf4j
 @RequestMapping("/user")
 @CrossOrigin
 public class UserController {
@@ -24,9 +24,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/add")
-    @ResponseBody
-    public User postData(@RequestBody User user){
-        return userDAO.save(user);
+    public User postData(@RequestBody User userObj, String deptObj){
+        log.debug("deptname="+deptObj);
+        return userDAO.save(userObj);
     }
 
     @DeleteMapping("/{id}")
